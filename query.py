@@ -84,13 +84,27 @@ WHERE brands.name = :name_1
 
 # 2. In your own words, what is an association table, and what *type* of relationship
 # does an association table manage?
+An association table does not have any meaningful data inside it, but contains information on relationships between different tables. They manage many to many relationships.
 
 # -------------------------------------------------------------------
 # Part 3
 
-def search_brands_by_name(mystr):
-    pass
+# brand_list = ['Ford', 'BMW', 'Chrysler']
+
+def search_brands_by_name(brand_list):
+    all_brand_objects = []
+    for brand in brand_list:
+        brand_objects = Brand.query.filter(Brand.name == brand).all()
+        all_brand_objects.extend(brand_objects)
+    return all_brand_objects
+
+
+# start_year = 1960
+# end_year = 2000
 
 
 def get_models_between(start_year, end_year):
-    pass
+    all_models = Model.query.filter(Model.year >= start_year, Model.year < end_year).all()
+    return all_models
+
+
